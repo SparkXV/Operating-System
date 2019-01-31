@@ -1,3 +1,7 @@
+/*
+     @author:-------
+*/
+
 #include<stdio.h>
 
 struct process{
@@ -11,7 +15,7 @@ struct process{
     int w_t;
 };
 
-void sort(struct process p[],int n)         
+void sort(struct process p[],int n)         // sorting acc to arrival time
 {
   int i,j;
   struct process temp;
@@ -28,7 +32,7 @@ void sort(struct process p[],int n)
      }
   }
 }
-void wait(struct process p[],int n)
+void wait(struct process p[],int n)        // to calculate waiting time
 {
    int i;
    p[0].w_t=0;
@@ -40,7 +44,7 @@ void wait(struct process p[],int n)
    }
 }
       
-void turn(struct process p[],int n)
+void turn(struct process p[],int n)      // to calculate turnaround time
 {
    int i;
    for(i=0;i<n;i++)
@@ -48,7 +52,7 @@ void turn(struct process p[],int n)
       p[i].t_t=p[i].w_t+p[i].b_t1+p[i].b_t2+p[i].b_t3;
    }
 }
-void avg(struct process p[],int n)
+void avg(struct process p[],int n)     // to calculate avg turnaround and waiting time
 {
    int i;
    float sum=0.0,count=0.0;
@@ -85,10 +89,10 @@ int main()
        fscanf(f,"%d %d %d %d %d",&p[i].pid,&p[i].a_t,&p[i].b_t1,&p[i].b_t2,&p[i].b_t3);
    }
    time(p,n);
-   printf("\nPid   Arr_t   Burst_t   Burst_tIO   Burst_tC    Res_t     Wait_t      TA_t\n");
+   printf("\nPid   Arr_t   Burst_tC   Burst_tIO   Burst_tC    Res_t     Wait_t      TA_t\n");
    for(i=0;i<n;i++)
    {
-     p[i].r_t=p[i].t_t+p[i].w_t;
+     p[i].r_t=p[i].t_t+p[i].w_t;   // Response time
      printf("%d\t%d\t%d\t  %d\t\t%d\t  %d\t    %d\t\t%d\n",p[i].pid,p[i].a_t,p[i].b_t1,p[i].b_t2,p[i].b_t3,p[i].r_t,p[i].w_t,p[i].t_t);
    }
    avg(p,n);
